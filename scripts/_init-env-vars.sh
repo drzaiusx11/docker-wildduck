@@ -27,7 +27,7 @@ init_runtime_env_variables () {
     _check_value 'FQDN' "${_DOMAIN_REGEX}" 'exit';
     _check_value 'MAIL_DOMAIN' "${_DOMAIN_REGEX}" "${FQDN}";
     _check_value 'PRODUCT_NAME' '.\+' 'Wildduck Mail';
-    _check_value 'MONGODB_HOST' '.\+' 'mongodb://mongodb:27017/wildduck';
+    _check_value 'MONGODB_HOST' '.\+' 'mongodb://mongo:27017/wildduck';
 
     # === General: Redis ===
     _check_value 'REDIS_HOST' '.\+' 'redis://redis:6379/8';
@@ -61,7 +61,7 @@ init_runtime_env_variables () {
     # === API ===
     local PROTO='http';
     _check_value 'API_ENABLE' 'true\|false' 'true';
-    _check_value 'API_USE_HTTPS' 'true\|false' 'true';
+    _check_value 'API_USE_HTTPS' 'true\|false' 'false';
     _check_value 'API_TOKEN_SECRET' '.\+' '';
 
     export _API_ACCESS_CONTROL_ENABLE='false';
@@ -88,19 +88,6 @@ init_runtime_env_variables () {
     _check_value 'CONFIGPROFILE_DISPLAY_DESC' '.\+' \
         'Install this profile to setup {email}';
     _check_value 'CONFIGPROFILE_ACCOUNT_DESC' '.\+' '{email}';
-
-
-    # === dir vars ===
-    # These variables do not have an underscore prefix, though they are
-    # 'calculated'. This is to keep path variables consistent across
-    # the whole code base.
-    export CONFIG_DIR='/etc/nodemailer';
-    export WILDDUCK_CONFIG_DIR="${CONFIG_DIR}/wildduck";
-    export HARAKA_CONFIG_DIR="${CONFIG_DIR}/haraka";
-    export ZONEMTA_CONFIG_DIR="${CONFIG_DIR}/zonemta";
-    export CLAMD_DATABSE_DIR="${CONFIG_DIR}/clamdb";
-    export DKIM_KEYS_DIR="${CONFIG_DIR}/dkim";
-    export SECRETS_DIR="${CONFIG_DIR}/secrets";
 
 
     # === IMAP ===
